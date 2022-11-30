@@ -1,7 +1,7 @@
 view: test_start_date {
 
   derived_table: {
-    sql: select max(created.date) as latest_date1 from orders ;;
+    sql: select max(created_at) as latest_date1 from orders ;;
   }
 
   dimension: latest_date {

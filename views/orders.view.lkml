@@ -51,6 +51,14 @@ view: orders {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: yes_no {
+    type: string
+    sql: CASE when ${test_start_date.latest_date} is null then "NO" else "YES" END ;;
+    #sql: ${test_start_date.latest_date};;
+  }
+
+
+
   measure: count {
     type: count
     drill_fields: [id, users.last_name, users.id, users.first_name, order_items.count]
