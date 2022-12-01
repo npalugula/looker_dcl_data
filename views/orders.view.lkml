@@ -51,12 +51,38 @@ view: orders {
     sql: ${TABLE}.user_id ;;
   }
 
+
+  parameter: date_parm {
+    type: string
+    suggest_explore: test_start_date
+    suggest_dimension: test_start_date.latest_date_str
+    #suggest_persist_for: "1 second"
+  }
+
+  # dimension: date_latest {
+  #   type: date
+  #   suggest_explore: test_start_date
+  #   suggest_dimension: test_start_date.latest_date
+  # }
+
+  # dimension: date_dim {
+  #   type: string
+  #   sql: {% condition date_parm %} ${date_latest} {% endcondition %}  ;;
+  # }
+
   dimension: yes_no {
     type: string
+    suggest_persist_for: "1 second"
     sql: CASE when ${test_start_date.latest_date} is null then "NO" else "YES" END ;;
     #sql: ${test_start_date.latest_date};;
   }
 
+  dimension: new_filter {
+    type: string
+    suggest_persist_for: "1 second"
+    sql: CASE when ${yes_no} = "YES" then ${test_start_date.latest_date_str} else cast(${created_date} as string) END ;;
+    #sql: ${test_start_date.latest_date};;
+  }
 
 
   measure: count {
