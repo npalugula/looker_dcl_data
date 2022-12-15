@@ -14,4 +14,4 @@ view: test_start_date {
     sql: cast(${TABLE}.latest_date1 as string) ;;
   }
 
-  }
+}
