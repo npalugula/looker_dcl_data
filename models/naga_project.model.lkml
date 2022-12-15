@@ -7,12 +7,12 @@ include: "/views/**/*.view"
 # Datagroups define a caching policy for an Explore. To learn more,
 # use the Quick Help panel on the right to see documentation.
 
-datagroup: naga_project_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
-}
+# datagroup: naga_project_default_datagroup {
+#   # sql_trigger: SELECT MAX(id) FROM etl_log;;
+#   max_cache_age: "1 hour"
+# }
 
-persist_with: naga_project_default_datagroup
+# persist_with: naga_project_default_datagroup
 
 # Explores allow you to join together different views (database tables) based on the
 # relationships between fields. By joining a view into an Explore, you make those
@@ -21,6 +21,7 @@ persist_with: naga_project_default_datagroup
 
 # To see the Explore you’re building, navigate to the Explore menu and select an Explore under "Naga Project"
 
+explore: test_start_date {}
 explore: product_sheets {
   join: products {
     type: left_outer
@@ -51,11 +52,17 @@ explore: inventory_items_vijaya {
 
 explore: users {}
 
+
+
 explore: orders {
   join: users {
     type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
+  }
+  join: test_start_date {
+    sql_on: ${orders.created_date}=${test_start_date.latest_date};;
+    relationship: one_to_one
   }
 }
 
@@ -66,11 +73,11 @@ explore: order_items {
     relationship: many_to_one
   }
 
-  join: orders {
-    type: left_outer
-    sql_on: ${order_items.order_id} = ${orders.id} ;;
-    relationship: many_to_one
-  }
+  # join: orders {
+  #   type: left_outer
+  #   sql_on: ${order_items.order_id} = ${orders.id} ;;
+  #   relationship: many_to_one
+  # }
 
   join: products {
     type: left_outer
@@ -78,11 +85,11 @@ explore: order_items {
     relationship: many_to_one
   }
 
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+  # join: users {
+  #   type: left_outer
+  #   sql_on: ${orders.user_id} = ${users.id} ;;
+  #   relationship: many_to_one
+  # }
 }
 
 explore: products {}
