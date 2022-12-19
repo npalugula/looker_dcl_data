@@ -83,6 +83,13 @@ view: orders {
     sql: CASE when ${yes_no} = "YES" then ${test_start_date.latest_date_str} else cast(${created_date} as string) END ;;
     #sql: ${test_start_date.latest_date};;
   }
+  filter: new_filter_1 {
+    type: string
+    suggest_dimension:  new_filter
+    suggest_persist_for: "1 second"
+    #sql: CASE when ${yes_no} = "YES" then ${test_start_date.latest_date_str} else cast(${created_date} as string) END ;;
+    #sql: ${test_start_date.latest_date};;
+  }
 
   measure: count {
     type: count
