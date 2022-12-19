@@ -1,7 +1,7 @@
 view: test_start_date {
 
   derived_table: {
-    sql: select CONVERT(varchar,max(created_at),23)  as latest_date1 from orders ;;
+    sql: select DATE_FORMAT(max(created_at),"%Y-%m-%d" ) from orders ;;
   }
 
   dimension: latest_date {
