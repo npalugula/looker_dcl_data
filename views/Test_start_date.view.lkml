@@ -1,7 +1,7 @@
 view: test_start_date {
 
   derived_table: {
-    sql: select CAST(max(created_at) AS DATE) as latest_date1 from orders ;;
+    sql: select max(created_at) as latest_date1 from orders ;;
   }
 
   dimension: latest_date {
