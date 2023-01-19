@@ -104,5 +104,5 @@ view: users {
     type: count
     drill_fields: [id, last_name, first_name, orders.count]
   }
-  #Test on Protected master branch.
+  #Test on
 }
