@@ -87,7 +87,6 @@ view: orders {
     type: string
     suggest_dimension:  new_filter
     suggest_persist_for: "1 second"
-    default_value: "${test_start_date.latest_date_str}"
     #sql: CASE when ${yes_no} = "YES" then ${test_start_date.latest_date_str} else cast(${created_date} as string) END ;;
     #sql: ${test_start_date.latest_date};;
   }
